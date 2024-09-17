@@ -3,7 +3,7 @@ from pyrogram.types import ChatJoinRequest , Message , InlineKeyboardButton , In
 from config import FSUB_CHANNEL1 , FSUB_CHANNEL2
 from .database import joinReq
 from pyrogram.errors import ChatAdminRequired , UserNotParticipant
-@Client.on_chat_join_request(filters.chat[FSUB_CHANNEL1 , FSUB_CHANNEL2])
+@Client.on_chat_join_request(filters.chat([FSUB_CHANNEL1 , FSUB_CHANNEL2]))
 async def join_reqs(client, message: ChatJoinRequest):
     try:
         await joinReq.add_join_req(message.from_user.id , message.chat.id)
@@ -11,7 +11,7 @@ async def join_reqs(client, message: ChatJoinRequest):
         print("Error in adding join request" , e)
         return
     
-@Client.on_chat_member_updated(filters.chat(FSUB_CHANNEL1 , FSUB_CHANNEL2))
+@Client.on_chat_member_updated(filters.chat([FSUB_CHANNEL1 , FSUB_CHANNEL2]))
 async def join_reqs(client, message: ChatJoinRequest):
     try:
         await joinReq.remove_join_req(message.from_user.id , message.chat.id)

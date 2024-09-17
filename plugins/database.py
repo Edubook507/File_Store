@@ -10,8 +10,7 @@ from pyrogram.file_id import FileId
 from pymongo.errors import DuplicateKeyError
 from umongo import Instance, Document, fields
 from motor.motor_asyncio import AsyncIOMotorClient
-from config import DB_URI, DB_NAME
-
+from config import DB_URI, DB_NAME , FSUB_CHANNEL2 , FSUB_CHANNEL1
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
@@ -24,6 +23,7 @@ logger.setLevel(logging.INFO)
 # Ask Doubt on telegram @KingVJ01
 
 COLLECTION_NAME = "Telegram_Files"
+JOIN_REQUESTS = "JOIN_REQUESTS"
 
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
@@ -115,3 +115,34 @@ def unpack_new_file_id(new_file_id):
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
+
+class JoinRequest():
+    def __init__(self , CHANNEL_ID1 : int, CHANNEL_ID2 : int):
+            self.channel_id1 = db[str(CHANNEL_ID1)]
+            self.channel_id2 = db[str(CHANNEL_ID2)]
+    async def add_join_req(self , user_id , channel_id):
+        try:
+            if channel_id not in [self.channel_id1 , self.channel_id2]:
+                return
+            col = self.channel_id1 if channel_id == self.channel_id1 else self.channel_id2
+            await col.update_one({"user_id":user_id},{"$set":{"user_id":user_id}} , upsert = True)
+        except Exception as e:
+            return
+    async def remove_join_req(self , user_id , channel_id):
+        try:
+            if channel_id not in [self.channel_id1 , self.channel_id2]:
+                return
+            col = self.channel_id1 if channel_id == self.channel_id1 else self.channel_id2
+            await col.delete_one({"user_id":user_id})
+        except Exception as e:
+            return
+    async def find_join_req(self , user_id , channel_id):
+        try:
+            if channel_id not in [self.channel_id1 , self.channel_id2]:
+                return
+            col = self.channel_id1 if channel_id == self.channel_id1 else self.channel_id2
+            return bool(await col.find_one({"user_id":user_id}))
+        except Exception as e:
+            return
+        
+joinReq = JoinRequest(FSUB_CHANNEL1 , FSUB_CHANNEL2)

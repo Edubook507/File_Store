@@ -24,7 +24,7 @@ async def isJoined(client : Client , message : Message):
             return True
         for i in [FSUB_CHANNEL1 , FSUB_CHANNEL2]:
             try: 
-                user = await client.get_chat_member(i , message.from_user.id)
+                await client.get_chat_member(i , message.from_user.id)
             except UserNotParticipant:
                 is_requested = await joinReq.find_join_req(message.from_user.id , i)
                 if is_requested:
@@ -38,7 +38,8 @@ async def isJoined(client : Client , message : Message):
                     [InlineKeyboardButton('🔍 Join Updates Channel', url=f"{invite_link2.invite_link}")]
                     ]
                     reply_markup = InlineKeyboardMarkup(btn)
-                    return await message.reply(text="**Please Join Updates Channel To Use This Bot.**", reply_markup=reply_markup)
+                    await message.reply(text="**Please Join Updates Channel To Use This Bot.**", reply_markup=reply_markup)
+                    return False            
             except Exception as e:
                 continue
         return True

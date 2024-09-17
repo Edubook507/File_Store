@@ -54,7 +54,7 @@ async def start(client, message):
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT.format(message.from_user.id, message.from_user.mention))
-    if await isJoined(client=client, message=message):pass
+    if not await isJoined(client=client, message=message):return
     if len(message.command) != 2:
         buttons = [[
             InlineKeyboardButton('💝 sᴜʙsᴄʀɪʙᴇ ᴍʏ ʏᴏᴜᴛᴜʙᴇ ᴄʜᴀɴɴᴇʟ', url='https://youtube.com/@Tech_VJ')
@@ -343,7 +343,7 @@ async def start(client, message):
 
 @Client.on_message(filters.command('api') & filters.private)
 async def shortener_api_handler(client, m: Message):
-    if await isJoined(client=client, message=m):pass
+    if not await isJoined(client=client , message=m):return
     user_id = m.from_user.id
     user = await get_user(user_id)
     cmd = m.command
@@ -363,7 +363,7 @@ async def shortener_api_handler(client, m: Message):
 
 @Client.on_message(filters.command("base_site") & filters.private)
 async def base_site_handler(client, m: Message):
-    if await isJoined(client=client, message=m):pass
+    if not await isJoined(client=client , message=m):return
     user_id = m.from_user.id
     user = await get_user(user_id)
     cmd = m.command
@@ -383,7 +383,7 @@ async def base_site_handler(client, m: Message):
 
 @Client.on_message(filters.command("del_site") & filters.private)
 async def del_site_handler(client, m: Message):
-    if await isJoined(client=client, message=m):pass
+    if not await isJoined(client=client , message=m):return
     user_id = m.from_user.id
     await remover_site_api(user_id)
     await m.reply("<b>Base Site , Api removed successfully</b>")

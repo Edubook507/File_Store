@@ -20,6 +20,8 @@ async def join_reqs(client, message: ChatJoinRequest):
         return
 async def isJoined(client : Client , message : Message):
     try:
+        if not FSUB_CHANNEL1 or not FSUB_CHANNEL2 :
+            return True
         for i in [FSUB_CHANNEL1 , FSUB_CHANNEL2]:
             try: 
                 user = await client.get_chat_member(i , message.from_user.id)

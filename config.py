@@ -82,8 +82,8 @@ else:
     ON_HEROKU = False
 URL = environ.get("URL", "https://testofvjfilter-1fa60b1b8498.herokuapp.com/")
 
-FSUB_CHANNEL1 = int(environ.get("FSUB_CHANNEL1", ""))
-FSUB_CHANNEL2 = int(environ.get("FSUB_CHANNEL2", ""))
+FSUB_CHANNEL1 = int(environ.get("FSUB_CHANNEL1", "-1001652082524"))
+FSUB_CHANNEL2 = int(environ.get("FSUB_CHANNEL2", "-1002236361577"))
 
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ

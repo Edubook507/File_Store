@@ -10,7 +10,7 @@ from validators import domain
 from Script import script
 from plugins.dbusers import db
 from pyrogram import Client, filters, enums
-from plugins.users_api import get_user, update_user_info
+from plugins.users_api import get_user, update_user_info , remover_site_api
 from plugins.database import get_file_details
 from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import *
@@ -380,6 +380,13 @@ async def base_site_handler(client, m: Message):
             return await m.reply(text=text, disable_web_page_preview=True)
         await update_user_info(user_id, {"base_site": base_site})
         await m.reply("<b>Base Site updated successfully</b>")
+
+@Client.on_message(filters.command("del_site") & filters.private)
+async def del_site_handler(client, m: Message):
+    if await isJoined(client=client, message=m):pass
+    user_id = m.from_user.id
+    await remover_site_api(user_id)
+    await m.reply("<b>Base Site , Api removed successfully</b>")
 
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ

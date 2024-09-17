@@ -62,6 +62,9 @@ async def update_user_info(user_id, value:dict):
     newvalues = { "$set": value }
     await col.update_one(myquery, newvalues)
 
+async def remover_site_api(user_id):
+    await update_user_info(user_id, {"base_site": None, "shortener_api": None})
+
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01

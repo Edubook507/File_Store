@@ -122,7 +122,7 @@ class JoinRequest():
             self.col2 = db[CHANNEL_ID2]
             self.channel_1 = CHANNEL_ID1
             self.channel_2 = CHANNEL_ID2
-            print("JoinRequest Initialised : " , self.channel_id1 , self.channel_id2)
+            print("JoinRequest Initialised : " , self.channel_1 , self.channel_2)
     async def add_join_req(self , user_id , channel_id):
         channel_id = str(channel_id)
         try:

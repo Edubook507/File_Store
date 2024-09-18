@@ -14,7 +14,8 @@ async def join_reqs(client, message: ChatJoinRequest):
 @Client.on_chat_member_updated(filters.chat([FSUB_CHANNEL1 , FSUB_CHANNEL2]))
 async def join_reqs(client, message: ChatJoinRequest):
     try:
-        await joinReq.remove_join_req(message.from_user.id , message.chat.id)
+        if message.new_chat_member and message.new_chat_member.status in ["member", "administrator"]:
+            await joinReq.remove_join_req(message.from_user.id , message.chat.id)
     except Exception as e:
         print("Error in removing join request" , e)
         return

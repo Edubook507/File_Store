@@ -121,28 +121,34 @@ class JoinRequest():
             self.channel_id1 = db[str(CHANNEL_ID1)]
             self.channel_id2 = db[str(CHANNEL_ID2)]
     async def add_join_req(self , user_id , channel_id):
+        channel_id = str(channel_id)
         try:
             if channel_id not in [self.channel_id1 , self.channel_id2]:
                 return
             col = self.channel_id1 if channel_id == self.channel_id1 else self.channel_id2
             await col.update_one({"user_id":user_id},{"$set":{"user_id":user_id}} , upsert = True)
         except Exception as e:
+            print('Error in add_join_req : ' , e)
             return
     async def remove_join_req(self , user_id , channel_id):
         try:
+            channel_id = str(channel_id)
             if channel_id not in [self.channel_id1 , self.channel_id2]:
                 return
             col = self.channel_id1 if channel_id == self.channel_id1 else self.channel_id2
             await col.delete_one({"user_id":user_id})
         except Exception as e:
+            print('Error in add_join_req : ' , e)
             return
     async def find_join_req(self , user_id , channel_id):
         try:
+            channel_id = str(channel_id)
             if channel_id not in [self.channel_id1 , self.channel_id2]:
                 return
             col = self.channel_id1 if channel_id == self.channel_id1 else self.channel_id2
             return bool(await col.find_one({"user_id":user_id}))
         except Exception as e:
+            print('Error in add_join_req : ' , e)
             return
         
 joinReq = JoinRequest(FSUB_CHANNEL1 , FSUB_CHANNEL2)

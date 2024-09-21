@@ -1,25 +1,8 @@
-from pyrogram import Client, filters, enums 
-from pyrogram.types import ChatJoinRequest , Message , InlineKeyboardButton , InlineKeyboardMarkup
+from pyrogram import Client
+from pyrogram.types import  Message , InlineKeyboardButton , InlineKeyboardMarkup
 from config import FSUB_CHANNEL1 , FSUB_CHANNEL2
 from .database import joinReq
-from pyrogram.errors import ChatAdminRequired , UserNotParticipant
-@Client.on_chat_join_request(filters.chat([FSUB_CHANNEL1 , FSUB_CHANNEL2]))
-async def join_reqs(client, message: ChatJoinRequest):
-    print('requested for join : ' , message.from_user.id , message.chat.id)
-    try:
-        await joinReq.add_join_req(message.from_user.id , message.chat.id)
-    except Exception as e:
-        print("Error in adding join request" , e)
-        return
-    
-@Client.on_chat_member_updated(filters.chat([FSUB_CHANNEL1 , FSUB_CHANNEL2]))
-async def join_reqs(client, message: ChatJoinRequest):
-    try:
-        if message.new_chat_member and message.new_chat_member.status in ["member", "administrator"]:
-            await joinReq.remove_join_req(message.from_user.id , message.chat.id)
-    except Exception as e:
-        print("Error in removing join request" , e)
-        return
+from pyrogram.errors import UserNotParticipant
 async def isJoined(client : Client , message : Message):
     try:
         if not FSUB_CHANNEL1 or not FSUB_CHANNEL2 :

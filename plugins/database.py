@@ -122,11 +122,8 @@ class JoinRequest():
             self.col2 = db[CHANNEL_ID2]
             self.channel_1 = CHANNEL_ID1
             self.channel_2 = CHANNEL_ID2
-            print("JoinRequest Initialised : " , self.channel_1 , self.channel_2)
     async def add_join_req(self , user_id , channel_id):
         channel_id = str(channel_id)
-        print('add_join_req : ' , user_id , channel_id , self.channel_1 , self.channel_2)
-        print('type of channel_id : ' , type(channel_id) , type(self.channel_1) , type(self.channel_2))
         try:
             if channel_id not in [self.channel_1 , self.channel_2]:
                 return

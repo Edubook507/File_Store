@@ -11,7 +11,7 @@ from Script import script
 from plugins.dbusers import db
 from pyrogram import Client, filters, enums
 from plugins.users_api import get_user, update_user_info , remover_site_api
-from plugins.database import get_file_details
+from plugins.database import get_file_details , joinReq
 from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import *
 from utils import verify_user, check_token, check_verification, get_token
@@ -29,6 +29,27 @@ BATCH_FILES = {}
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
 
+@Client.on_chat_join_request()
+async def join_reqs(client, message: ChatJoinRequest):
+    if message.chat.id not in [FSUB_CHANNEL1 , FSUB_CHANNEL2]:
+        return
+    try:
+        await joinReq.add_join_req(message.from_user.id , message.chat.id)
+    except Exception as e:
+        print("Error in adding join request" , e)
+        return
+    
+@Client.on_chat_member_updated()
+async def joinn_reqs(client, message: ChatMemberUpdated):
+    if message.chat.id not in [FSUB_CHANNEL1 , FSUB_CHANNEL2]:
+        return
+    try:
+        if message.new_chat_member and message.new_chat_member.status in ["member", "administrator"]:
+            await joinReq.remove_join_req(message.from_user.id , message.chat.id)
+        
+    except Exception as e:
+        print("Error in removing join request" , e)
+        return
 
 def get_size(size):
     """Get size in readable format"""

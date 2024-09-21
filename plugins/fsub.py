@@ -1,9 +1,9 @@
 from pyrogram import Client
 from pyrogram.types import  Message , InlineKeyboardButton , InlineKeyboardMarkup
-from config import FSUB_CHANNEL1 , FSUB_CHANNEL2
+from config import FSUB_CHANNEL1 , FSUB_CHANNEL2 , BOT_USERNAME
 from .database import joinReq
 from pyrogram.errors import UserNotParticipant
-async def isJoined(client : Client , message : Message):
+async def isJoined(client : Client , message : Message , command= None):
     try:
         if not FSUB_CHANNEL1 or not FSUB_CHANNEL2 :
             return True
@@ -20,7 +20,8 @@ async def isJoined(client : Client , message : Message):
                     btn = [[
                         InlineKeyboardButton('🔍 Join Updates Channel', url=f"{invite_link1.invite_link}")
                     ], 
-                    [InlineKeyboardButton('🔍 Join Updates Channel', url=f"{invite_link2.invite_link}")]
+                    [InlineKeyboardButton('🔍 Join Updates Channel', url=f"{invite_link2.invite_link}")], 
+                    [InlineKeyboardButton('Get File', url=f"https://t.me/{BOT_USERNAME}?start={command}") if command else InlineKeyboardButton('Try Again', url=f"https://t.me/{BOT_USERNAME}?start")]
                     ]
                     reply_markup = InlineKeyboardMarkup(btn)
                     await message.reply(text="**Please Join Updates Channel To Use This Bot.**", reply_markup=reply_markup)

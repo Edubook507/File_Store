@@ -125,6 +125,8 @@ class JoinRequest():
             print("JoinRequest Initialised : " , self.channel_1 , self.channel_2)
     async def add_join_req(self , user_id , channel_id):
         channel_id = str(channel_id)
+        print('add_join_req : ' , user_id , channel_id , self.channel_1 , self.channel_2)
+        print('type of channel_id : ' , type(channel_id) , type(self.channel_1) , type(self.channel_2))
         try:
             if channel_id not in [self.channel_1 , self.channel_2]:
                 return
@@ -141,7 +143,7 @@ class JoinRequest():
             col = self.col1 if channel_id == self.channel_1  else self.col2
             await col.delete_one({"user_id":user_id})
         except Exception as e:
-            print('Error in add_join_req : ' , e)
+            print('Error in remove_join_req : ' , e)
             return
     async def find_join_req(self , user_id , channel_id):
         try:
@@ -151,7 +153,7 @@ class JoinRequest():
             col = self.col1 if channel_id == self.channel_1  else self.col2
             return bool(await col.find_one({"user_id":user_id}))
         except Exception as e:
-            print('Error in add_join_req : ' , e)
+            print('Error in find_join_req : ' , e)
             return
         
 joinReq = JoinRequest(str(FSUB_CHANNEL1) , str(FSUB_CHANNEL2))

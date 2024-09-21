@@ -5,6 +5,7 @@ from .database import joinReq
 from pyrogram.errors import ChatAdminRequired , UserNotParticipant
 @Client.on_chat_join_request(filters.chat([FSUB_CHANNEL1 , FSUB_CHANNEL2]))
 async def join_reqs(client, message: ChatJoinRequest):
+    print('requested for join : ' , message.from_user.id , message.chat.id)
     try:
         await joinReq.add_join_req(message.from_user.id , message.chat.id)
     except Exception as e:

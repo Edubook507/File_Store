@@ -70,17 +70,17 @@ def get_size(size):
 
 
 @Client.on_message(filters.command("start") & filters.incoming)
-async def start(client, message):
+async def start(client, message : Message):
     username = (await client.get_me()).username
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT.format(message.from_user.id, message.from_user.mention))
     try:
-        data= message.command[1] if not message.command[1] == 'try' else None
+        data = message.command[1] if message.command[1] != 'try' else None
     except:
         data = None
     if not await isJoined(client=client, message=message , command=data):return
-    if len(message.command) != 2:
+    if len(message.command) != 2 or data == None:
         buttons = [[
             InlineKeyboardButton('💝 sᴜʙsᴄʀɪʙᴇ ᴍʏ ʏᴏᴜᴛᴜʙᴇ ᴄʜᴀɴɴᴇʟ', url='https://youtube.com/@Tech_VJ')
             ],[

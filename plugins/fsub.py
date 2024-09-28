@@ -21,7 +21,7 @@ async def isJoined(client : Client , message : Message , command= None):
                         InlineKeyboardButton('🔍 Join Updates Channel', url=f"{invite_link1.invite_link}")
                     ], 
                     [InlineKeyboardButton('🔍 Join Updates Channel', url=f"{invite_link2.invite_link}")], 
-                    [InlineKeyboardButton('Get File', url=f"https://t.me/{BOT_USERNAME}?start={command}") if command else InlineKeyboardButton('Try Again', url=f"https://t.me/{BOT_USERNAME}?start")]
+                    [InlineKeyboardButton('Get File', url=f"https://t.me/{BOT_USERNAME}?start={command}") if command else InlineKeyboardButton('Try Again', url=f"https://t.me/{BOT_USERNAME}?start=try")]
                     ]
                     reply_markup = InlineKeyboardMarkup(btn)
                     await message.reply(text="**Please Join Updates Channel To Use This Bot.**", reply_markup=reply_markup)

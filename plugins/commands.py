@@ -76,7 +76,7 @@ async def start(client, message):
         await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT.format(message.from_user.id, message.from_user.mention))
     try:
-        data= message.command[1]
+        data= message.command[1] if not message.command[1] == 'try' else None
     except:
         data = None
     if not await isJoined(client=client, message=message , command=data):return

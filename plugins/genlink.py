@@ -43,7 +43,7 @@ async def incoming_gen_link(bot, message):
     user_id = message.from_user.id
     user = await get_user(user_id)
     if WEBSITE_URL_MODE == True:
-        share_link = f"{WEBSITE_URL}?Tech_VJ={outstr}"
+        share_link = f"{WEBSITE_URL}?CinemaHub={outstr}"
     else:
         share_link = f"https://t.me/{username}?start={outstr}"
     if user["base_site"] and user["shortener_api"] != None:
@@ -76,7 +76,7 @@ async def gen_link_s(bot, message):
     user_id = message.from_user.id
     user = await get_user(user_id)
     if WEBSITE_URL_MODE == True:
-        share_link = f"{WEBSITE_URL}?Tech_VJ={outstr}"
+        share_link = f"{WEBSITE_URL}?CinemaHub={outstr}"
     else:
         share_link = f"https://t.me/{username}?start={outstr}"
     if user["base_site"] and user["shortener_api"] != None:
@@ -94,10 +94,10 @@ async def gen_link_s(bot, message):
 async def gen_link_batch(bot, message):
     username = (await bot.get_me()).username
     if " " not in message.text:
-        return await message.reply("Use correct format.\nExample /batch https://t.me/vj_botz/10 https://t.me/vj_botz/20.")
+        return await message.reply("Use correct format.\nExample /batch https://t.me/cinemahdmovie/10 https://t.me/cinemahdmovie/20.")
     links = message.text.strip().split(" ")
     if len(links) != 3:
-        return await message.reply("Use correct format.\nExample /batch https://t.me/vj_botz/10 https://t.me/vj_botz/20.")
+        return await message.reply("Use correct format.\nExample /batch https://t.me/cinemahdmovie/10 https://t.me/cinemahdmovie/20.")
     cmd, first, last = links
     regex = re.compile("(https://)?(t\.me/|telegram\.me/|telegram\.dog/)(c/)?(\d+|[a-zA-Z_0-9]+)/(\d+)$")
     match = regex.match(first)
@@ -191,7 +191,7 @@ async def gen_link_batch(bot, message):
     user_id = message.from_user.id
     user = await get_user(user_id)
     if WEBSITE_URL_MODE == True:
-        share_link = f"{WEBSITE_URL}?Tech_VJ=BATCH-{file_id}"
+        share_link = f"{WEBSITE_URL}?CinemaHub=BATCH-{file_id}"
     else:
         share_link = f"https://t.me/{username}?start=BATCH-{file_id}"
     if user["base_site"] and user["shortener_api"] != None:

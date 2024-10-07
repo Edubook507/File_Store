@@ -18,13 +18,13 @@ async def isJoined(client : Client , message : Message , command= None):
                     invite_link1 = await client.create_chat_invite_link(FSUB_CHANNEL1, creates_join_request=True)
                     invite_link2 = await client.create_chat_invite_link(FSUB_CHANNEL2, creates_join_request=True)
                     btn = [[
-                        InlineKeyboardButton('🔍 Join Updates Channel', url=f"{invite_link1.invite_link}")
+                        InlineKeyboardButton('ᴄʜᴀɴɴᴇʟ1', url=f"{invite_link1.invite_link}"),
+                        InlineKeyboardButton('ᴄʜᴀɴɴᴇʟ2', url=f"{invite_link2.invite_link}") 
                     ], 
-                    [InlineKeyboardButton('🔍 Join Updates Channel', url=f"{invite_link2.invite_link}")], 
-                    [InlineKeyboardButton('Get File', url=f"https://t.me/{BOT_USERNAME}?start={command}") if command else InlineKeyboardButton('Try Again', url=f"https://t.me/{BOT_USERNAME}?start=try")]
+                    [InlineKeyboardButton('♻️ ɢᴇᴛ ғɪʟᴇ ♻️', url=f"https://t.me/{BOT_USERNAME}?start={command}") if command else InlineKeyboardButton('♻️ ᴛʀʏ ᴀɢᴀɪɴ ♻️', url=f"https://t.me/{BOT_USERNAME}?start=try")]
                     ]
                     reply_markup = InlineKeyboardMarkup(btn)
-                    await message.reply(text="**Please Join Updates Channel To Use This Bot.**", reply_markup=reply_markup)
+                    await message.reply(text="**Please Join Channel1 & Channel2 To Use This Bot.**", reply_markup=reply_markup)
                     return False            
             except Exception as e:
                 continue

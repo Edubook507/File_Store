@@ -82,13 +82,13 @@ async def start(client, message : Message):
     if not await isJoined(client=client, message=message , command=data):return
     if len(message.command) != 2 or data == None:
         buttons = [[
+            InlineKeyboardButton('⚡️ᴄᴏɴᴛᴀᴄᴛ ᴜs', url='https://t.me/Movie_Request_233bot')
+            ],[
             InlineKeyboardButton('⚡️ ʜᴇʟᴘ', callback_data='help'),
             InlineKeyboardButton('⚡️ ᴀʙᴏᴜᴛ', callback_data='about')
             ],[
             InlineKeyboardButton('⚡️ᴍᴏᴠɪᴇ ʀᴇǫᴜᴇsᴛ', url='https://t.me/cinemahubmovierequest'),
             InlineKeyboardButton('⚡️ ᴜᴘᴅᴀᴛᴇ', url='https://t.me/cinemahdmovie')
-            ],[
-            InlineKeyboardButton('⚡️ᴄᴏɴᴛᴀᴄᴛ ᴜs', url='https://t.me/Movie_Request_233bot')
         ]]
         if CLONE_MODE == True:
             buttons.append([InlineKeyboardButton('⚡️ᴄʟᴏɴᴇ ʙᴏᴛ', callback_data='clone')])

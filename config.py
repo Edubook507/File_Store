@@ -20,7 +20,7 @@ def is_enabled(value, default):
 # Bot Information
 API_ID = int(environ.get("API_ID", "15964059"))
 API_HASH = environ.get("API_HASH", "786fd04eca38875885d9427894796c5c")
-BOT_TOKEN = environ.get("BOT_TOKEN", "")
+BOT_TOKEN = environ.get("BOT_TOKEN", "7215420981:AAGZmocEXWkRVSV3_YMtqNIElqpBnzrAyLs")
 
 PICS = (environ.get('PICS', 'https://graph.org/file/8fdbc07c4b25916ef2603.jpg')).split() # Bot Start Picture
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '8054848989 8135620820').split()]

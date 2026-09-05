@@ -87,10 +87,5 @@ async def restart_bots():
                 plugins={"root": "clone_plugins"},
             )
             await vj.start()
-            logging.info(f"Successfully started bot: {bot_token}")
-        except AccessTokenExpired:
-            logging.error(f"Token expired for bot {bot_token}")
-            mongo_db.bots.delete_one({"token": bot_token})
         except Exception as e:
             logging.exception(f"Error while restarting bot with token {bot_token}: {e}")
-
